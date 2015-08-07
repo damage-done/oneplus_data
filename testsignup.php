@@ -55,6 +55,6 @@ if(empty($exist)){
 	header("location:detail.php?user=".$displayname."&email=".$email."");
 }
 else{
-	print 'bestaat al';
+	header("location:index.php");
 }
 ?>
