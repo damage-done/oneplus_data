@@ -24,6 +24,7 @@ echo "Connected successfully";
 
 $sql = "SELECT rank, referrals, displayname FROM users ORDER BY rank ASC LIMIT 5";
 
+$count = 0;
 
 $result = $conn->query($sql);
 
@@ -37,6 +38,19 @@ if($result->num_rows > 0){
 } else {
     echo "0 results";
 }
+
+$sql = "SELECT COUNT(*) FROM `users`";
+
+$result = $conn->query($sql);
+
+if($result->num_rows > 0){
+	while($row = $result->fetch_assoc()) {
+       $total_users = $row['COUNT(*)'];
+    }
+} else {
+    echo "0 results";
+}
+
 
 ?>
 
@@ -76,15 +90,15 @@ if($result->num_rows > 0){
 				</div>
 			</form>
 
-			<h2>100 members joined so far</h2> <!-- Get the number of users that we have -->
+			<h2><?php echo $total_users; ?> members joined so far</h2> <!-- Get the number of users that we have -->
 			<ol>
 
 				<!-- Get data from database here, username, rank and refs 
 				(it would be nice if you have the . in 1.000.000 it makes it more easy to read) -->
 
 				<li id="one"><?php echo $user[1]['username']; ?><br/><span>Rank: <?php echo $user[1]['rank']; ?> / Referrals: <?php echo $user[1]['referrals'] ?></span></li>
-				<li id="two"><?php echo $user[2]['username']; ?><br/><span>Rank: <?php echo $user[2]['rank']; ?> / Referrals: <?php echo $user[2]['referrals'] ?></span></li>
-				<li id="three"><?php echo $user[3]['username']; ?><br/><span>Rank: <?php echo $user[3]['rank']; ?>  / Referrals: <?php echo $user[3]['referrals'] ?></span></li>
+				<li id="two"><?php if(isset($user[2])){echo $user[2]['username'];}  ?><br/><span>Rank: <?php if(isset($user[2])){echo $user[2]['rank'];} ?> / Referrals: <?php if(isset($user[2])){echo $user[2]['referrals'];} ?></span></li>
+				<li id="three"><?php if(isset($user[3])){echo $user[3]['username'];} ?><br/><span>Rank: <?php if(isset($user[3])){echo $user[3]['rank'];} ?>  / Referrals: <?php if(isset($user[3])){echo $user[3]['referrals'];} ?></span></li>
 				<li>Display name<br/><span>Rank: 1.200.000 / Referrals: 2</span></li>
 				<li>Display name<br/><span>Rank: 1.700.000 / Referrals: 4</span></li>
 			</ol>

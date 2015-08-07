@@ -1,7 +1,7 @@
 <?php 
 
 $email = $_GET['email'];
-$username = $_GET['user'];
+$user = $_GET['user'];
 
 //$servername = "localhost:3307";
 //$username = "root";
@@ -15,17 +15,16 @@ $dbname = "renssmit_be";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-$stmt = "SELECT rank, referrals FROM users WHERE `DisplayName` = ?";
-$stmt->bind_param('s', $username);
-$result = $conn->query($stmt);
-
-if($result->num_rows > 0){
-	while($row = $result->fetch_assoc()) {
-       $rank = $row["rank"];
-       $referrals = $row["referrals"];
-    }
-} else {
-    echo "0 results";
+$query = "SELECT rank, referrals FROM users WHERE `DisplayName` = ?";
+$stmt = $conn->stmt_init();
+$stmt->prepare($query);
+$stmt->bind_param("s", $user);
+$stmt->execute();
+$result = $stmt->get_result();
+while ($row = $result->fetch_array(MYSQLI_NUM))
+{
+	$rank = $row[0];
+	$referrals = $row[1];
 }
 
 ?>
@@ -105,7 +104,7 @@ if($result->num_rows > 0){
 			</table>
 
 
-			<form action="index.html">
+			<form action="index.php">
 				<button class="btn btn-3 btn-3e icon-arrow-right" type="submit">Go back</button>
 			</form>
 
