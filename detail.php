@@ -27,6 +27,12 @@ while ($row = $result->fetch_array(MYSQLI_NUM))
 	$referrals = $row[1];
 }
 
+$conn->close();
+
+$users;
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
 $sql = "SELECT rank, referrals, displayname FROM users ORDER BY rank ASC LIMIT 5";
 
 $count = 0;
@@ -36,9 +42,9 @@ $result = $conn->query($sql);
 if($result->num_rows > 0){
 	while($row = $result->fetch_assoc()) {
 		$count++;
-       $user[$count]['username'] = $row["displayname"];
-       $user[$count]['rank'] = $row["rank"];
-       $user[$count]['referrals'] = $row["referrals"];
+       $users[$count]['username'] = $row["displayname"];
+       $users[$count]['rank'] = $row["rank"];
+       $users[$count]['referrals'] = $row["referrals"];
     }
 } else {
     echo "0 results";
@@ -101,11 +107,11 @@ if($result->num_rows > 0){
 				<!-- Get data from database here, username, rank and refs 
 				(it would be nice if you have the . in 1.000.000 it makes it more easy to read) -->
 
-				<li id="one"><?php echo $user[1]['username']; ?><br/><span>Rank: <?php echo $user[1]['rank']; ?> / Referrals: <?php echo $user[1]['referrals'] ?></span></li>
-				<li id="two"><?php if(isset($user[2])){echo $user[2]['username'];}  ?><br/><span>Rank: <?php if(isset($user[2])){echo $user[2]['rank'];} ?> / Referrals: <?php if(isset($user[2])){echo $user[2]['referrals'];} ?></span></li>
-				<li id="three"><?php if(isset($user[3])){echo $user[3]['username'];} ?><br/><span>Rank: <?php if(isset($user[3])){echo $user[3]['rank'];} ?>  / Referrals: <?php if(isset($user[3])){echo $user[3]['referrals'];} ?></span></li>
-				<li id="three"><?php if(isset($user[4])){echo $user[4]['username'];} ?><br/><span>Rank: <?php if(isset($user[4])){echo $user[4]['rank'];} ?>  / Referrals: <?php if(isset($user[4])){echo $user[4]['referrals'];} ?></span></li>
-				<li id="three"><?php if(isset($user[5])){echo $user[5]['username'];} ?><br/><span>Rank: <?php if(isset($user[5])){echo $user[5]['rank'];} ?>  / Referrals: <?php if(isset($user[5])){echo $user[5]['referrals'];} ?></span></li>
+				<li id="one"><?php echo $users[1]['username']; ?><br/><span>Rank: <?php echo $users[1]['rank']; ?> / Referrals: <?php echo $users[1]['referrals'] ?></span></li>
+				<li id="two"><?php if(isset($users[2])){echo $users[2]['username'];}  ?><br/><span>Rank: <?php if(isset($users[2])){echo $users[2]['rank'];} ?> / Referrals: <?php if(isset($users[2])){echo $users[2]['referrals'];} ?></span></li>
+				<li id="three"><?php if(isset($users[3])){echo $users[3]['username'];} ?><br/><span>Rank: <?php if(isset($users[3])){echo $users[3]['rank'];} ?>  / Referrals: <?php if(isset($users[3])){echo $users[3]['referrals'];} ?></span></li>
+				<li id="three"><?php if(isset($users[4])){echo $users[4]['username'];} ?><br/><span>Rank: <?php if(isset($users[4])){echo $users[4]['rank'];} ?>  / Referrals: <?php if(isset($users[4])){echo $users[4]['referrals'];} ?></span></li>
+				<li id="three"><?php if(isset($users[5])){echo $users[5]['username'];} ?><br/><span>Rank: <?php if(isset($users[5])){echo $users[5]['rank'];} ?>  / Referrals: <?php if(isset($users[5])){echo $users[5]['referrals'];} ?></span></li>
 			</ol>
 
 		</section>

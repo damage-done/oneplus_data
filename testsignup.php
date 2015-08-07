@@ -31,12 +31,30 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-$stmt = $conn->prepare('INSERT INTO `users` (`displayname`, `email`, `rank`, `referrals`) VALUES (?, ?, ?, ?);');
-$stmt-> bind_param('ssii', $displayname, $email, $rank, $referrals);
+
+//////////////////////////////////
+$query = 'SELECT displayname FROM users WHERE displayname = ?';
+$stmt = $conn->stmt_init();
+$stmt->prepare($query);
+$stmt->bind_param("s", $displayname);
 $stmt->execute();
+$result = $stmt->get_result();
+while ($row = $result->fetch_array(MYSQLI_NUM))
+{
+	$exist = $row;
+}
 
-$conn->close();
+///////////////////////////////////
 
-header("location:detail.php?user=".$displayname."&email=".$email."");
+if(empty($exist)){
+	$stmt = $conn->prepare('INSERT INTO `users` (`displayname`, `email`, `rank`, `referrals`) VALUES (?, ?, ?, ?);');
+	$stmt-> bind_param('ssii', $displayname, $email, $rank, $referrals);
+	$stmt->execute();
 
+	$conn->close();
+	header("location:detail.php?user=".$displayname."&email=".$email."");
+}
+else{
+	print 'bestaat al';
+}
 ?>
