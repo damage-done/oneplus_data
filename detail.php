@@ -27,6 +27,36 @@ while ($row = $result->fetch_array(MYSQLI_NUM))
 	$referrals = $row[1];
 }
 
+$sql = "SELECT rank, referrals, displayname FROM users ORDER BY rank ASC LIMIT 5";
+
+$count = 0;
+
+$result = $conn->query($sql);
+
+if($result->num_rows > 0){
+	while($row = $result->fetch_assoc()) {
+		$count++;
+       $user[$count]['username'] = $row["displayname"];
+       $user[$count]['rank'] = $row["rank"];
+       $user[$count]['referrals'] = $row["referrals"];
+    }
+} else {
+    echo "0 results";
+}
+
+$sql = "SELECT COUNT(*) FROM `users`";
+
+$result = $conn->query($sql);
+
+if($result->num_rows > 0){
+	while($row = $result->fetch_assoc()) {
+       $total_users = $row['COUNT(*)'];
+    }
+} else {
+    echo "0 results";
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -71,11 +101,11 @@ while ($row = $result->fetch_array(MYSQLI_NUM))
 				<!-- Get data from database here, username, rank and refs 
 				(it would be nice if you have the . in 1.000.000 it makes it more easy to read) -->
 
-				<li id="one">Display name<br/><span>Rank: 1.017 / Referrals: 189</span></li>
-				<li id="two">Display name<br/><span>Rank: 5.800/ Referrals: 60</span></li>
-				<li id="three">Display name<br/><span>Rank: 879.534 / Referrals: 19</span></li>
-				<li>Display name<br/><span>Rank: 1.200.000 / Referrals: 2</span></li>
-				<li>Display name<br/><span>Rank: 1.700.000 / Referrals: 4</span></li>
+				<li id="one"><?php echo $user[1]['username']; ?><br/><span>Rank: <?php echo $user[1]['rank']; ?> / Referrals: <?php echo $user[1]['referrals'] ?></span></li>
+				<li id="two"><?php if(isset($user[2])){echo $user[2]['username'];}  ?><br/><span>Rank: <?php if(isset($user[2])){echo $user[2]['rank'];} ?> / Referrals: <?php if(isset($user[2])){echo $user[2]['referrals'];} ?></span></li>
+				<li id="three"><?php if(isset($user[3])){echo $user[3]['username'];} ?><br/><span>Rank: <?php if(isset($user[3])){echo $user[3]['rank'];} ?>  / Referrals: <?php if(isset($user[3])){echo $user[3]['referrals'];} ?></span></li>
+				<li id="three"><?php if(isset($user[4])){echo $user[4]['username'];} ?><br/><span>Rank: <?php if(isset($user[4])){echo $user[4]['rank'];} ?>  / Referrals: <?php if(isset($user[4])){echo $user[4]['referrals'];} ?></span></li>
+				<li id="three"><?php if(isset($user[5])){echo $user[5]['username'];} ?><br/><span>Rank: <?php if(isset($user[5])){echo $user[5]['rank'];} ?>  / Referrals: <?php if(isset($user[5])){echo $user[5]['referrals'];} ?></span></li>
 			</ol>
 
 		</section>

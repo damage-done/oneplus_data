@@ -99,8 +99,8 @@ if($result->num_rows > 0){
 				<li id="one"><?php echo $user[1]['username']; ?><br/><span>Rank: <?php echo $user[1]['rank']; ?> / Referrals: <?php echo $user[1]['referrals'] ?></span></li>
 				<li id="two"><?php if(isset($user[2])){echo $user[2]['username'];}  ?><br/><span>Rank: <?php if(isset($user[2])){echo $user[2]['rank'];} ?> / Referrals: <?php if(isset($user[2])){echo $user[2]['referrals'];} ?></span></li>
 				<li id="three"><?php if(isset($user[3])){echo $user[3]['username'];} ?><br/><span>Rank: <?php if(isset($user[3])){echo $user[3]['rank'];} ?>  / Referrals: <?php if(isset($user[3])){echo $user[3]['referrals'];} ?></span></li>
-				<li>Display name<br/><span>Rank: 1.200.000 / Referrals: 2</span></li>
-				<li>Display name<br/><span>Rank: 1.700.000 / Referrals: 4</span></li>
+				<li id="three"><?php if(isset($user[4])){echo $user[4]['username'];} ?><br/><span>Rank: <?php if(isset($user[4])){echo $user[4]['rank'];} ?>  / Referrals: <?php if(isset($user[4])){echo $user[4]['referrals'];} ?></span></li>
+				<li id="three"><?php if(isset($user[5])){echo $user[5]['username'];} ?><br/><span>Rank: <?php if(isset($user[5])){echo $user[5]['rank'];} ?>  / Referrals: <?php if(isset($user[5])){echo $user[5]['referrals'];} ?></span></li>
 			</ol>
 
 		</section>
