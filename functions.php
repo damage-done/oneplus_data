@@ -15,10 +15,7 @@ function connectDB(){
 
 	//values for online//
 
-	/*$servername = "localhost:3307";
-	$username = "root";
-	$password = "usbw";
-	$dbname = "oneplusinvites";*/
+	
 
 	//end online values//
 
@@ -47,7 +44,6 @@ function checkConnection($connection)
 
 //show first 5 ranks with username, rank and referrals in one userArray//
 
-<<<<<<< HEAD
 function showFirstFive($connection, $sort){
 
 	$userArray;
@@ -57,13 +53,6 @@ function showFirstFive($connection, $sort){
 	}else if ($sort == 1){
 		$sql = "SELECT rank, referrals, displayname FROM users ORDER BY referrals DESC LIMIT 5";
 	}
-=======
-function showFirstFive($connection){
-
-	$userArray;
-
-	$sql = "SELECT rank, referrals, displayname FROM users ORDER BY rank ASC LIMIT 5";
->>>>>>> origin/master
 
 	$count = 0;
 
@@ -110,10 +99,6 @@ function totalUsersRegistered($connection)
 
 //--------------------------
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> origin/master
 //Check if User Already exists on in our Database//
 function checkIfUserExists($user, $connection, $email)
 {	$query = 'SELECT displayname FROM users WHERE displayname = ?';
@@ -163,9 +148,4 @@ function getUserStats($connection, $user){
 	return $userArray;
 }
 
-<<<<<<< HEAD
-=======
-=======
->>>>>>> origin/master
->>>>>>> origin/master
 ?>
