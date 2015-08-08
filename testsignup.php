@@ -1,18 +1,13 @@
 <?php
 
+include_once("functions.php");
+
+//getting POST-variables from form//
+
 $displayname = $_POST['disname'];
 $email = $_POST['email'];
 
-//$servername = "localhost:3307";
-//$username = "root";
-//$password = "usbw";
-//$dbname = "oneplusinvites";
-
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "oneplusdata";
-
+//getting API FROM Oneplus//
 
 $url = "https://invites.oneplus.net/index.php?r=share/signup&success_jsonpCallback=success_jsonpCallback&email=".$email."&koid=6GJ8S&_=1438659411445";
 
@@ -23,38 +18,15 @@ $JSON = (json_decode($JSON));
 $rank = $JSON->data->rank;
 $referrals = $JSON->data->ref_count;
 
+//END API//
+
 
 // Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = connectDB();
 
 // Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+echo checkConnection($conn);
 
-//////////////////////////////////
-$query = 'SELECT displayname FROM users WHERE displayname = ?';
-$stmt = $conn->stmt_init();
-$stmt->prepare($query);
-$stmt->bind_param("s", $displayname);
-$stmt->execute();
-$result = $stmt->get_result();
-while ($row = $result->fetch_array(MYSQLI_NUM))
-{
-	$exist = $row;
-}
+checkIfUserExists($displayname, $conn, $email);
 
-///////////////////////////////////
-
-if(empty($exist)){
-	$stmt = $conn->prepare('INSERT INTO `users` (`displayname`, `email`, `rank`, `referrals`) VALUES (?, ?, ?, ?);');
-	$stmt-> bind_param('ssii', $displayname, $email, $rank, $referrals);
-	$stmt->execute();
-
-	$conn->close();
-	header("location:detail.php?user=".$displayname."&email=".$email."");
-}
-else{
-	header("location:index.php");
-}
 ?>

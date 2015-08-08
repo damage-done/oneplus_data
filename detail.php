@@ -1,67 +1,17 @@
 <?php 
 
+include_once("functions.php");
+
+//get values from the query string//
+
 $email = $_GET['email'];
 $user = $_GET['user'];
 
-//$servername = "localhost:3307";
-//$username = "root";
-//$password = "usbw";
-//$dbname = "oneplusinvites";
+$conn = connectDB();
 
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "oneplusdata";
+$userStats = getUserStats($conn, $user);
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-$query = "SELECT rank, referrals FROM users WHERE `DisplayName` = ?";
-$stmt = $conn->stmt_init();
-$stmt->prepare($query);
-$stmt->bind_param("s", $user);
-$stmt->execute();
-$result = $stmt->get_result();
-while ($row = $result->fetch_array(MYSQLI_NUM))
-{
-	$rank = $row[0];
-	$referrals = $row[1];
-}
-
-$conn->close();
-
-$users;
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-$sql = "SELECT rank, referrals, displayname FROM users ORDER BY rank ASC LIMIT 5";
-
-$count = 0;
-
-$result = $conn->query($sql);
-
-if($result->num_rows > 0){
-	while($row = $result->fetch_assoc()) {
-		$count++;
-       $users[$count]['username'] = $row["displayname"];
-       $users[$count]['rank'] = $row["rank"];
-       $users[$count]['referrals'] = $row["referrals"];
-    }
-} else {
-    echo "0 results";
-}
-
-$sql = "SELECT COUNT(*) FROM `users`";
-
-$result = $conn->query($sql);
-
-if($result->num_rows > 0){
-	while($row = $result->fetch_assoc()) {
-       $total_users = $row['COUNT(*)'];
-    }
-} else {
-    echo "0 results";
-}
-
+$users = showFirstFive($conn);
 
 ?>
 
@@ -101,7 +51,7 @@ if($result->num_rows > 0){
 				</div>
 			</form>
 
-			<h2>100 members joined so far</h2>
+			<h2><?php echo totalUsersRegistered($conn); ?> members joined so far</h2>
 			<ol>
 
 				<!-- Get data from database here, username, rank and refs 
@@ -134,8 +84,8 @@ if($result->num_rows > 0){
 					<td><h2>Number of referrals</h2></td>
 				</tr>
 				<tr>
-					<td><h1><?php echo $rank; ?></h1></td>
-					<td><h1><?php echo $referrals; ?></h1></td>
+					<td><h1><?php echo $userStats['rank']; ?></h1></td>
+					<td><h1><?php echo $userStats['referrals']; ?></h1></td>
 				</tr>
 			</table>
 
