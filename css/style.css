@@ -91,6 +91,7 @@ body :-ms-input-placeholder {
 }
 
 section.leaderboard{ 
+  width: 230px;
   border-radius: 17px;
   z-index: 2;
   position: absolute;

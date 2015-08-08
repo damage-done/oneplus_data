@@ -33,6 +33,7 @@ $conn->close();
     <title>OnePlus Reservation Data</title>
 
         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/mediascreen.css">
     	<script language="javascript" type="text/javascript">
 			function doReload(catid){
 				document.location = 'index.php?sort=' + sort;
