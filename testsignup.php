@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 include_once("functions.php");
 
 //getting POST-variables from form//

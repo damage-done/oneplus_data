@@ -14,9 +14,6 @@ function connectDB(){
 	//end local values//
 
 	//values for online//
-
-	
-
 	//end online values//
 
 	$conn = new mysqli($servername, $username, $password, $dbname);
@@ -35,7 +32,6 @@ function checkConnection($connection)
 	if ($connection->connect_error) {
     die("Connection failed: " . $connection->connect_error);
 	} 
-	echo "Connected successfully";
 }
 
 //end checking your connection//
@@ -122,6 +118,7 @@ function checkIfUserExists($user, $connection, $email)
 	}
 	else{
 		$connection -> close();
+		$_SESSION['message'] = "You are already registered on this site";
 		header("location:detail.php?user=".$user."&email=".$email."");
 	}
 }

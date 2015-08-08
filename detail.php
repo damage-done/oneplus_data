@@ -1,6 +1,8 @@
-<?php 
-
+<?php
+session_start();
 include_once("functions.php");
+
+if(isset($_SESSION['message'])){echo $_SESSION['message'];}
 
 //get values from the query string//
 
@@ -11,7 +13,11 @@ $conn = connectDB();
 
 $userStats = getUserStats($conn, $user);
 
-$users = showFirstFive($conn);
+if(isset($_GET['sort']))
+{
+	$sort = $_GET['sort'];
+}else{$sort=0;}
+$users = showFirstFive($conn, $sort);
 
 ?>
 
@@ -42,16 +48,16 @@ $users = showFirstFive($conn);
 			<h4><a href="#">View leader board</a></h4>
 			</header>
 
-			<form>
+			<form action="index.php" method="get">
 				<div id="mainselection">
-				<select name="sort">
-					<option value="rank">Sort by rank</option> <!-- Sort leaderboard by Rank -->
-					<option value="refs">Sort by referrals</option> <!-- Sort leaderboard by Referrals -->
+				<select name="sort" onchange="this.form.submit();">
+					<option <?php if($sort ==0) print 'SELECTED'; ?> value="0">Sort by rank</option> <!-- Sort leaderboard by Rank -->
+					<option <?php if($sort ==1) print 'SELECTED'; ?> value="1">Sort by referrals</option> <!-- Sort leaderboard by Referrals -->
 				</select>
 				</div>
 			</form>
 
-			<h2><?php echo totalUsersRegistered($conn); ?> members joined so far</h2>
+			<h2><?php $conn = connectDB(); echo totalUsersRegistered($conn); $conn->close() ?> members joined so far</h2> <!-- Get the number of users that we have -->
 			<ol>
 
 				<!-- Get data from database here, username, rank and refs 
@@ -75,6 +81,7 @@ $users = showFirstFive($conn);
 
 		<section class="middle">
 			<h1>We found your data!</h1>
+
 
 			<div class="clear"></div>
 			

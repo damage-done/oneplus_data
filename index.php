@@ -16,8 +16,11 @@ echo checkConnection($conn);
 
 //create the first five user arrays
 
-$sort = $_GET['sort'];
-print $sort;
+if(isset($_GET['sort']))
+{
+	$sort = $_GET['sort'];
+}else{$sort=0;}
+
 $users = showFirstFive($conn, $sort);
 
 //end creating array//
