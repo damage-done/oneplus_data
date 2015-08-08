@@ -9,6 +9,7 @@ $conn = connectDB();
 // End creation //
 
 // Check connection
+<<<<<<< HEAD
 
 echo checkConnection($conn);
 
@@ -23,6 +24,25 @@ $users = showFirstFive($conn, $sort);
 //end creating array//
 
 $conn->close();
+=======
+
+echo checkConnection($conn);
+
+// End Check //
+
+//create the first five user arrays
+
+$users = showFirstFive($conn);
+<<<<<<< HEAD
+
+//end creating array//
+
+$conn->close();
+=======
+
+//end creating array//
+>>>>>>> origin/master
+>>>>>>> origin/master
 
 ?>
 
@@ -60,7 +80,15 @@ $conn->close();
 				</div>
 			</form>
 
+<<<<<<< HEAD
 			<h2><?php $conn = connectDB(); echo totalUsersRegistered($conn); $conn->close() ?> members joined so far</h2> <!-- Get the number of users that we have -->
+=======
+<<<<<<< HEAD
+			<h2><?php $conn = connectDB(); echo totalUsersRegistered($conn); $conn->close() ?> members joined so far</h2> <!-- Get the number of users that we have -->
+=======
+			<h2><?php echo totalUsersRegistered($conn); ?> members joined so far</h2> <!-- Get the number of users that we have -->
+>>>>>>> origin/master
+>>>>>>> origin/master
 			<ol>
 
 				<!-- Get data from database here, username, rank and refs 
