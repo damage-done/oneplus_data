@@ -88,8 +88,8 @@ if($result->num_rows > 0){
 				<!-- Display top 5 members (highest rank? Most referrals?) -->
 
 			<header>
-			<h1>Leaderboard</h1>
-			<h4><a href="#">View leaderboard</a></h4>
+			<h1>Leader board</h1>
+			<h4><a href="#">View leader board</a></h4>
 			</header>
 
 			<form>

@@ -1,4 +1,7 @@
-<?php
+<?php 
+
+$email = $_GET['email'];
+$user = $_GET['user'];
 
 //$servername = "localhost:3307";
 //$username = "root";
@@ -10,17 +13,21 @@ $username = "root";
 $password = "root";
 $dbname = "oneplusdata";
 
-$user;
-
-
-// Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
-echo "Connected successfully";
+$query = "SELECT rank, referrals FROM users WHERE `DisplayName` = ?";
+$stmt = $conn->stmt_init();
+$stmt->prepare($query);
+$stmt->bind_param("s", $user);
+$stmt->execute();
+$result = $stmt->get_result();
+while ($row = $result->fetch_array(MYSQLI_NUM))
+{
+	$rank = $row[0];
+	$referrals = $row[1];
+}
+
+$conn->close();
 
 $users;
 
@@ -54,9 +61,6 @@ if($result->num_rows > 0){
 } else {
     echo "0 results";
 }
-
-
-?>
 
 
 ?>
@@ -97,7 +101,7 @@ if($result->num_rows > 0){
 				</div>
 			</form>
 
-			<h2><?php echo $total_users; ?> members joined so far</h2> <!-- Get the number of users that we have -->
+			<h2>100 members joined so far</h2>
 			<ol>
 
 				<!-- Get data from database here, username, rank and refs 
@@ -117,20 +121,27 @@ if($result->num_rows > 0){
 
 	<div class="container">
 
+		<!-- Do you handle the error messages? -->
+
 		<section class="middle">
-			<h1>Welcome OnePlus Fan</h1>
-			<h3>Get your reservation data by filling in your (forum)name & email below.</h3>
+			<h1>Titel error/info</h1>
 
 			<div class="clear"></div>
 			
-			<form class="form" method="post" action="testsignup.php" > <!-- Do your thing? xD // efkes aangepast... getemail <-> testsignup (Bjorn) -->
-				<input type="text" name="disname" required placeholder="Display name">
-				<input type="email" name="email" required placeholder="Enter a valid email address">
-				<button class="btn btn-3 btn-3e icon-arrow-right" type="submit">Show data</button>
+			<?php
+        if(!empty($error)) {
+            echo '<div class="error box">' . $error . '</div>';
+        }
+        if(!empty($info)) {
+            echo '<div class="info box">' . $info . '</div>';
+        }
+    ?>
 
-				<!-- Show detail data here on same page, see detail.html -->
 
+			<form action="index.php">
+				<button class="btn btn-3 btn-3e icon-arrow-right" type="submit">Go back</button>
 			</form>
+
 		</section>
 
 		<footer><p>Made with love by <a href="http://www.bdmultimedia.be/" target="_blank">BDmultimedia</a>, <a href="https://forums.oneplus.net/members/xtrme-q.155318/" target="_blank">Xtrme Q</a> & <a href="https://forums.oneplus.net/members/vici0us.663229/" target="_blank">Vici0us</a></p></footer>
