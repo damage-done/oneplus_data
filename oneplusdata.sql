@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Machine: localhost
--- Gegenereerd op: 07 aug 2015 om 00:01
+-- Gegenereerd op: 08 aug 2015 om 12:20
 -- Serverversie: 5.5.34
 -- PHP-versie: 5.5.10
 
@@ -27,59 +27,36 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `oneplus_details` (
-  `email` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `string` varchar(300) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `email` varchar(30) NOT NULL,
+  `string` varchar(300) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `oneplus_emails`
+-- Tabelstructuur voor tabel `users`
 --
 
-CREATE TABLE IF NOT EXISTS `oneplus_emails` (
-  `id` int(5) NOT NULL,
-  `email` varchar(30) CHARACTER SET latin1 NOT NULL,
-  `name` varchar(30) CHARACTER SET latin1 NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+CREATE TABLE IF NOT EXISTS `users` (
+  `DisplayName` text NOT NULL,
+  `email` text NOT NULL,
+  `Rank` int(11) NOT NULL,
+  `Referrals` int(11) NOT NULL,
+  UNIQUE KEY `Rank` (`Rank`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Gegevens worden geëxporteerd voor tabel `oneplus_emails`
+-- Gegevens worden geëxporteerd voor tabel `users`
 --
 
-INSERT INTO `oneplus_emails` (`id`, `email`, `name`) VALUES
-(0, 'smit.rens@icloud.com', 'test'),
-(0, 'smit.rens@icloud.com', 'test'),
-(0, 'smit.rens@icloud.com', 'test'),
-(0, 'smit.rens@icloud.com', 'test'),
-(0, 'smit.rens@icloud.com', 'test'),
-(0, 'smit.rens@icloud.com', 'test'),
-(0, 'smit.rens@icloud.com', 'test'),
-(0, 'smit.rens@icloud.com', 'test'),
-(0, 'smit.rens@icloud.com', 'test'),
-(0, 'smit.rens@icloud.com', 'test'),
-(0, 'smit.rens@icloud.com', 'test'),
-(0, 'smit.rens@icloud.com', 'test'),
-(0, 'smit.rens@icloud.com', 'test'),
-(0, 'smit.rens@icloud.com', 'test'),
-(0, 'smit.rens@icloud.com', 'test'),
-(0, 'smit.rens@icloud.com', 'test'),
-(0, 'smit.rens@icloud.com', 'test'),
-(0, 'smit.rens@icloud.com', 'test');
-
--- --------------------------------------------------------
-
---
--- Tabelstructuur voor tabel `oneplus_users`
---
-
-CREATE TABLE IF NOT EXISTS `oneplus_users` (
-  `id` int(5) NOT NULL,
-  `kid` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
-  `rank` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `ref_count` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `total` varchar(300) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+INSERT INTO `users` (`DisplayName`, `email`, `Rank`, `Referrals`) VALUES
+('KeithLi', 'kpd20062000@yahoo.com.hk', 2208, 81),
+('lorenzovinci19', 'lorenzovinci19@yahoo.it', 6677, 18),
+('Gopal kedia', 'gopal.kedia009@gmail.com', 9203, 11),
+('BjornDer', 'bjorn.derudder@gmail.com', 16977, 5),
+('SunnyHQ', 'zsunnyy.lv@gmail.com', 59841, 0),
+('Gazzer2k', 'gazzer2k@yahoo.com', 245456, 0),
+('mato22', 'mato252@gmail.com', 2074008, 0);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
