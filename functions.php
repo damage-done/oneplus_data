@@ -98,6 +98,7 @@ function totalUsersRegistered($connection)
 
 //--------------------------
 
+<<<<<<< HEAD
 //Check if User Already exists on in our Database//
 function checkIfUserExists($user, $connection, $email)
 {	$query = 'SELECT displayname FROM users WHERE displayname = ?';
@@ -147,4 +148,6 @@ function getUserStats($connection, $user){
 	return $userArray;
 }
 
+=======
+>>>>>>> origin/master
 ?>
