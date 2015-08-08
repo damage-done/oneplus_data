@@ -1,63 +1,24 @@
 <?php
 
-//$servername = "localhost:3307";
-//$username = "root";
-//$password = "usbw";
-//$dbname = "oneplusinvites";
+include_once("functions.php");
 
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "oneplusdata";
 
 $user;
-
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+// Create connection //
+$conn = connectDB();
+// End creation //
 
 // Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
-echo "Connected successfully";
 
-$users;
+echo checkConnection($conn);
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+// End Check //
 
-$sql = "SELECT rank, referrals, displayname FROM users ORDER BY rank ASC LIMIT 5";
+//create the first five user arrays
 
-$count = 0;
+$users = showFirstFive($conn);
 
-$result = $conn->query($sql);
-
-if($result->num_rows > 0){
-	while($row = $result->fetch_assoc()) {
-		$count++;
-       $users[$count]['username'] = $row["displayname"];
-       $users[$count]['rank'] = $row["rank"];
-       $users[$count]['referrals'] = $row["referrals"];
-    }
-} else {
-    echo "0 results";
-}
-
-$sql = "SELECT COUNT(*) FROM `users`";
-
-$result = $conn->query($sql);
-
-if($result->num_rows > 0){
-	while($row = $result->fetch_assoc()) {
-       $total_users = $row['COUNT(*)'];
-    }
-} else {
-    echo "0 results";
-}
-
-
-?>
-
+//end creating array//
 
 ?>
 
@@ -97,7 +58,7 @@ if($result->num_rows > 0){
 				</div>
 			</form>
 
-			<h2><?php echo $total_users; ?> members joined so far</h2> <!-- Get the number of users that we have -->
+			<h2><?php echo totalUsersRegistered($conn); ?> members joined so far</h2> <!-- Get the number of users that we have -->
 			<ol>
 
 				<!-- Get data from database here, username, rank and refs 
