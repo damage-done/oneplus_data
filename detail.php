@@ -8,10 +8,10 @@ $user = $_GET['user'];
 //$password = "usbw";
 //$dbname = "oneplusinvites";
 
-$servername = "renssmit.be.mysql";
-$username = "renssmit_be";
-$password = "x7fZjwPj";
-$dbname = "renssmit_be";
+$servername = "localhost";
+$username = "root";
+$password = "root";
+$dbname = "oneplusdata";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -146,7 +146,7 @@ if($result->num_rows > 0){
 
 		</section>
 
-		
+		<footer><p>Made with love by <a href="http://www.bdmultimedia.be/" target="_blank">BDmultimedia</a>, <a href="https://forums.oneplus.net/members/xtrme-q.155318/" target="_blank">Xtrme Q</a> & <a href="https://forums.oneplus.net/members/vici0us.663229/" target="_blank">Vici0us</a></p></footer>
 
 	</div>
 	

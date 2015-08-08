@@ -8,10 +8,10 @@ $email = $_POST['email'];
 //$password = "usbw";
 //$dbname = "oneplusinvites";
 
-$servername = "renssmit.be.mysql";
-$username = "renssmit_be";
-$password = "x7fZjwPj";
-$dbname = "renssmit_be";
+$servername = "localhost";
+$username = "root";
+$password = "root";
+$dbname = "oneplusdata";
 
 
 $url = "https://invites.oneplus.net/index.php?r=share/signup&success_jsonpCallback=success_jsonpCallback&email=".$email."&koid=6GJ8S&_=1438659411445";
