@@ -1,63 +1,28 @@
 <?php
 
-//$servername = "localhost:3307";
-//$username = "root";
-//$password = "usbw";
-//$dbname = "oneplusinvites";
+include_once("functions.php");
 
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "oneplusdata";
 
 $user;
-
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+// Create connection //
+$conn = connectDB();
+// End creation //
 
 // Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
-echo "Connected successfully";
 
-$users;
+echo checkConnection($conn);
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+// End Check //
 
-$sql = "SELECT rank, referrals, displayname FROM users ORDER BY rank ASC LIMIT 5";
+//create the first five user arrays
 
-$count = 0;
+$sort = $_GET['sort'];
+print $sort;
+$users = showFirstFive($conn, $sort);
 
-$result = $conn->query($sql);
+//end creating array//
 
-if($result->num_rows > 0){
-	while($row = $result->fetch_assoc()) {
-		$count++;
-       $users[$count]['username'] = $row["displayname"];
-       $users[$count]['rank'] = $row["rank"];
-       $users[$count]['referrals'] = $row["referrals"];
-    }
-} else {
-    echo "0 results";
-}
-
-$sql = "SELECT COUNT(*) FROM `users`";
-
-$result = $conn->query($sql);
-
-if($result->num_rows > 0){
-	while($row = $result->fetch_assoc()) {
-       $total_users = $row['COUNT(*)'];
-    }
-} else {
-    echo "0 results";
-}
-
-
-?>
-
+$conn->close();
 
 ?>
 
@@ -66,15 +31,13 @@ if($result->num_rows > 0){
   <head>
     <meta charset="UTF-8">
     <title>OnePlus Reservation Data</title>
-    
-    
-    
-    
-        <link rel="stylesheet" href="css/style.css">
 
-    
-    
-    
+        <link rel="stylesheet" href="css/style.css">
+    	<script language="javascript" type="text/javascript">
+			function doReload(catid){
+				document.location = 'index.php?sort=' + sort;
+			}
+		</script>
   </head>
 
   <body>
@@ -88,16 +51,16 @@ if($result->num_rows > 0){
 			<h4><a href="#">View leader board</a></h4>
 			</header>
 
-			<form>
+			<form action="index.php" method="get">
 				<div id="mainselection">
-				<select name="sort">
-					<option value="rank">Sort by rank</option> <!-- Sort leaderboard by Rank -->
-					<option value="refs">Sort by referrals</option> <!-- Sort leaderboard by Referrals -->
+				<select name="sort" onchange="this.form.submit();">
+					<option <?php if($sort ==0) print 'SELECTED'; ?> value="0">Sort by rank</option> <!-- Sort leaderboard by Rank -->
+					<option <?php if($sort ==1) print 'SELECTED'; ?> value="1">Sort by referrals</option> <!-- Sort leaderboard by Referrals -->
 				</select>
 				</div>
 			</form>
 
-			<h2><?php echo $total_users; ?> members joined so far</h2> <!-- Get the number of users that we have -->
+			<h2><?php $conn = connectDB(); echo totalUsersRegistered($conn); $conn->close() ?> members joined so far</h2> <!-- Get the number of users that we have -->
 			<ol>
 
 				<!-- Get data from database here, username, rank and refs 
