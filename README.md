@@ -13,6 +13,11 @@ Feel free to fork this project and contribute with us!
 UI/HTML/CSS: [smitrens](https://github.com/smitrens)<br/>
 UX/PHP/Parsing: [bderudder](https://github.com/bderudder), [BDmultimedia](http://www.bdmultimedia.be/)
 
+## OnePlus forum threads about this project
+
+[6/8 Back-end developer -found](https://forums.oneplus.net/threads/oneplus-project-searching-back-end-developer.334707/)<br/>
+[?/? Project thread -coming soon](https://forums.oneplus.net/threads/)
+
 ## License
 
 Copyright 2015 Rens Smit
