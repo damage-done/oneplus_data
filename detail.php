@@ -66,8 +66,8 @@ $users = showFirstFive($conn, $sort);
 				<li id="one"><?php echo $users[1]['username']; ?><br/><span>Rank: <?php echo $users[1]['rank']; ?> / Referrals: <?php echo $users[1]['referrals'] ?></span></li>
 				<li id="two"><?php if(isset($users[2])){echo $users[2]['username'];}  ?><br/><span>Rank: <?php if(isset($users[2])){echo $users[2]['rank'];} ?> / Referrals: <?php if(isset($users[2])){echo $users[2]['referrals'];} ?></span></li>
 				<li id="three"><?php if(isset($users[3])){echo $users[3]['username'];} ?><br/><span>Rank: <?php if(isset($users[3])){echo $users[3]['rank'];} ?>  / Referrals: <?php if(isset($users[3])){echo $users[3]['referrals'];} ?></span></li>
-				<li id="three"><?php if(isset($users[4])){echo $users[4]['username'];} ?><br/><span>Rank: <?php if(isset($users[4])){echo $users[4]['rank'];} ?>  / Referrals: <?php if(isset($users[4])){echo $users[4]['referrals'];} ?></span></li>
-				<li id="three"><?php if(isset($users[5])){echo $users[5]['username'];} ?><br/><span>Rank: <?php if(isset($users[5])){echo $users[5]['rank'];} ?>  / Referrals: <?php if(isset($users[5])){echo $users[5]['referrals'];} ?></span></li>
+				<li><?php if(isset($users[4])){echo $users[4]['username'];} ?><br/><span>Rank: <?php if(isset($users[4])){echo $users[4]['rank'];} ?>  / Referrals: <?php if(isset($users[4])){echo $users[4]['referrals'];} ?></span></li>
+				<li><?php if(isset($users[5])){echo $users[5]['username'];} ?><br/><span>Rank: <?php if(isset($users[5])){echo $users[5]['rank'];} ?>  / Referrals: <?php if(isset($users[5])){echo $users[5]['referrals'];} ?></span></li>
 			</ol>
 
 		</section>
